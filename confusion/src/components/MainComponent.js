@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 //import logo from './logo.svg';
-import {Navbar,NavbarBrand} from 'reactstrap';
-import Menu from './MenuComponent'
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
+import Menu from './MenuComponent';
 //import './App.css';
 import {DISHES} from '../shared/dishes';
 import DishdetailComponent from '../components/DishDetailComponent'
@@ -16,21 +17,25 @@ class Main extends Component{
 }
 
 onDishSelect(dish) {
+    if(dish.name === this.state.selectedDish)
+    {
+      this.setState({selectedDish: null})
+    }
+    else
+    {
     this.setState({selectedDish: dish.name});
+    }
 }
 
 render(){
   return (
     <div>
-      <Navbar dark color='primary'>
-      <div className="container">
-        <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-      </div>
-      </Navbar>
+      <Header />
       <Menu dishes={this.state.dishes} onClick={(dish)=>this.onDishSelect(dish)} />
       <div className="container">
-      <DishdetailComponent dish={this.state.dishes.filter((dish)=>dish.name == this.state.selectedDish)[0]} />
+      <DishdetailComponent dish={this.state.dishes.filter((dish)=>dish.name === this.state.selectedDish)[0]} />
       </div>
+      <Footer />
       </div>
   );
 }
