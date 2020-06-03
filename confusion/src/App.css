@@ -31,3 +31,7 @@ address{
 .navbar-dark {
     background-color: #512DA8;
 }
+
+.change-font{
+    font-family: "Comic Sans MS", cursive, sans-serif;   
+}
