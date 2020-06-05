@@ -1,12 +1,36 @@
-import React,{Component} from 'react';
+import React from 'react';
 
-class Home extends Component{
-    render(){
-        return(
-            <div className="container">
-                <h4>Home</h4>
+import { Card, CardImg, CardSubtitle, CardText,CardBody,CardTitle } from 'reactstrap';
+
+function RenderCard({item}){
+    return(
+        <Card>
+            <CardImg src={item.image} alt={item.name} />
+            <CardBody>
+            <CardTitle><h4>{item.name}</h4></CardTitle>
+            {item.designation ? <CardSubtitle><strong>{item.designation}</strong></CardSubtitle> : null }
+            <CardText>{item.description}</CardText>
+            </CardBody>
+        </Card>
+    );
+}
+
+function Home(props){
+    return(
+        <div className="container">
+            <div className="row align-items-start">
+                <div className="col-12 col-md m-1">
+                    <RenderCard item={props.dish} />
+                </div>
+                <div className="col-12 col-md m-1">
+                    <RenderCard item={props.promotion} />
+                </div>
+                <div className="col-12 col-md m-1">
+                    <RenderCard item={props.leader} />
+                </div>
             </div>
-        );
+        </div>
+    );
     }
-};
+
 export default Home;
