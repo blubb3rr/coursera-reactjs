@@ -24,12 +24,12 @@ import {Link} from 'react-router-dom';
         });
         return (
             <div className="container">
-                <div className="rpw"> 
+                <div className="mt-2"> 
                 <Breadcrumb>
                 <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
                 <BreadcrumbItem active>Menu</BreadcrumbItem>
                 </Breadcrumb>
-                <div className="row">
+                <div>
                         <h3>Menu</h3>
                 </div>
                 </div>

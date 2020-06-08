@@ -41,13 +41,13 @@ import {Link} from 'react-router-dom';
         else{
         return(
             <div className="container">
-            <div className="row">
+            <div className="">
             <Breadcrumb>
                 <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
                 <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
             </Breadcrumb>
             </div>
-            <div className="row">
+            <div className="">
                         <h3>{props.dish.name}</h3>
                 </div>
             <div className="row">

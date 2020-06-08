@@ -32,6 +32,9 @@ address{
     background-color: #512DA8;
 }
 
-.change-font{
-    font-family: "Comic Sans MS", cursive, sans-serif;   
+.form-control.is-invalid{
+    background-image: none;
+}
+.form-control.is-valid{
+    background-image: none;
 }
