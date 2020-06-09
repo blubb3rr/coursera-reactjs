@@ -1,6 +1,88 @@
-import React from 'react';
-import {Card,CardImg,CardText,CardBody,CardTitle,Breadcrumb,BreadcrumbItem} from 'reactstrap';
+import React,{Component} from 'react';
+import {Card,CardImg,CardText,CardBody,CardTitle,Breadcrumb,BreadcrumbItem, Modal, Button,ModalHeader,Label, ModalBody,Col} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {Control,LocalForm,Errors} from 'react-redux-form';
+const maxlength=(len)=>(val) => !(val)||(val.length<=len);
+const minlength=(len)=>(val) => (val)&&(val.length>=len);
+const happiness=true;
+    
+
+
+const hello="nice";
+    class CommentForm extends Component{
+        constructor(props){
+            super(props);
+            this.state={
+                isModalOpen: false
+            }
+            this.toggleModal=this.toggleModal.bind(this);
+            this.handleSubmit=this.handleSubmit.bind(this);
+        }
+        handleSubmit(values){
+            console.log(JSON.stringify(values));
+            alert(JSON.stringify(values));
+        }
+        toggleModal(){
+            this.setState(
+                {
+                    isModalOpen: !(this.state.isModalOpen)
+                }
+            )
+        }
+        render(){
+            return(
+                <> 
+                <a className="btn btn-outline-secondary" onClick={this.toggleModal}><span className="fa fa-pencil"></span>Submit Comment</a>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+                    <ModalBody>
+                        <LocalForm onSubmit={(values)=>this.handleSubmit(values)}>
+                        <Col className="form-group row">
+                        <Col sm={2}>
+                        <Label className="mt-1" htmlFor="rating">Ratings:</Label>
+                        </Col>
+                        <Col sm={10}>
+                        <Control.select model=".rating" name="rating" className="form-control">
+                            <option>--Select Stars</option>
+                            <option>⭐</option>
+                            <option>⭐⭐</option>
+                            <option>⭐⭐⭐</option>
+                            <option>⭐⭐⭐⭐</option>
+                            <option>⭐⭐⭐⭐⭐</option>
+                        </Control.select>
+                        </Col>
+                        </Col>                        <Col className="form-group row">
+                        <Col sm={2}>
+                        <Label className="mt-1" htmlFor="rating">Name:</Label>
+                        </Col>
+                        <Col sm={10}>
+                        <Control.text model=".name" id="name" name="name" className="form-control" placeholder="Your Name" validators={{minlength:minlength(3),maxlength: maxlength(15)}} />
+                        <Errors className="text-danger" model=".name" show="touched" messages={{
+                            minlength: "Minimum 3 Characters Requrired",
+                            maxlength: "Maximum 15 Characters Allowed"
+                        }} />
+                        </Col>
+                        </Col>
+
+                        <Col className="form-group row">
+                        <Col sm={2}>
+                        <Label className="mt-1" htmlFor="rating">Name:</Label>
+                        </Col>
+                        <Col sm={10}>
+                        <Control.textarea model=".comment" rows="6" name="comment" className="form-control" placeholder="Comments" />
+                        </Col>
+                        </Col>
+                        <Col sm={{size:10,offset:2}}>
+                        <Button type="Submit" color="primary">Submit</Button><span> </span>
+                        </Col>
+                        </LocalForm>
+                    </ModalBody>
+                </Modal>
+                
+                </>
+            );
+        }
+    }
     function RenderComments({comments}){
         const commentlist=comments.map(item=>(
             <li>
@@ -57,6 +139,7 @@ import {Link} from 'react-router-dom';
             <div className="col-5 m-1">
             <h4>Comments</h4>
             <RenderComments comments={props.comments} />
+            <CommentForm />
         </div>
         </div>
         </div>
