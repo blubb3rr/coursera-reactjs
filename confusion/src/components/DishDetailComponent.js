@@ -4,11 +4,7 @@ import {Link} from 'react-router-dom';
 import {Control,LocalForm,Errors} from 'react-redux-form';
 const maxlength=(len)=>(val) => !(val)||(val.length<=len);
 const minlength=(len)=>(val) => (val)&&(val.length>=len);
-const happiness=true;
-    
 
-
-const hello="nice";
     class CommentForm extends Component{
         constructor(props){
             super(props);
@@ -19,8 +15,7 @@ const hello="nice";
             this.handleSubmit=this.handleSubmit.bind(this);
         }
         handleSubmit(values){
-            console.log(JSON.stringify(values));
-            alert(JSON.stringify(values));
+            this.props.addComment(this.props.dishId,values.rating,values.author,values.comment);
         }
         toggleModal(){
             this.setState(
@@ -83,7 +78,7 @@ const hello="nice";
             );
         }
     }
-    function RenderComments({comments}){
+    function RenderComments({comments,addComment,dishId}){
         const commentlist=comments.map(item=>(
             <li>
                 {item.comment}<br/>
@@ -96,6 +91,7 @@ const hello="nice";
                 <ul className="list-unstyled">
                     {commentlist}
                 </ul>
+                <CommentForm dishId={dishId} addComment={addComment} />
             </div>
         )
     }
@@ -138,8 +134,7 @@ const hello="nice";
             </div>
             <div className="col-5 m-1">
             <h4>Comments</h4>
-            <RenderComments comments={props.comments} />
-            <CommentForm />
+            <RenderComments comments={props.comments} addComment={props.addComment} dishId={props.dish.id} />
         </div>
         </div>
         </div>
